@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.app.mycinemaapp.core"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -28,6 +28,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -35,6 +38,8 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -56,4 +61,10 @@ dependencies {
     api(libs.material)
     api(libs.glide)
     api(libs.koin.android)
+    api(libs.androidx.navigation.fragment.ktx)
+    api(libs.androidx.navigation.ui.ktx)
+    api(libs.androidx.appcompat)
+    api(libs.material)
+    api(libs.androidx.activity)
+    api(libs.androidx.constraintlayout)
 }
