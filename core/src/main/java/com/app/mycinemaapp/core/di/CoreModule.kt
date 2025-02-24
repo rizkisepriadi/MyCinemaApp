@@ -53,15 +53,15 @@ val networkModule = module {
             .build()
             .create(ApiService::class.java)
     }
+}
 
-    val repositoryModule = module {
-        single { RemoteDataSource(get()) }
-        single { LocalDataSource(get()) }
-        single<IMovieRepository> {
-            CinemaRepository(
-                get(),
-                get(),
-            )
-        }
+val repositoryModule = module {
+    single { RemoteDataSource(get()) }
+    single { LocalDataSource(get()) }
+    single<IMovieRepository> {
+        CinemaRepository(
+            get(),
+            get(),
+        )
     }
 }
