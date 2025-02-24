@@ -64,7 +64,7 @@ data class ResultsItem(
 	val releaseDate: String,
 
 	@field:SerializedName("popularity")
-	val popularity: Long,
+	val popularity: Double,
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Double,
