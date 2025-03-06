@@ -14,8 +14,9 @@
     <fragment
         android:id="@+id/navigation_favorite"
         android:name="com.app.mycinemaapp.favorite.FavoriteFragment"
-        android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite"/>
-
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite">
+        <deepLink app:uri="mycinemaapp://favorite" />
+    </fragment>
 
 </navigation>
