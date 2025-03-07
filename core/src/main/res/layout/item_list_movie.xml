@@ -9,14 +9,6 @@
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
 
-    <ImageButton
-        android:id="@+id/favorite_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/baseline_favorite_border_24" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -31,8 +23,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="Dragon Ball Z: The Final Bout"
-            android:textColor="#666666"
-            android:textFontWeight="700"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
         <RatingBar
