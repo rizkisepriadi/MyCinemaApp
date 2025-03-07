@@ -34,7 +34,7 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ListViewHolder>(DIFF_CALLBA
                 .load("https://image.tmdb.org/t/p/w500${data.posterUrl}")
                 .into(binding.thumbnail)
             binding.tvTitle.text = data.title
-            binding.tvRating.rating = data.rating.toFloat()
+            binding.tvRating.rating = (data.rating / 2).toFloat()
             binding.tvDescription.text = if (data.overview.length > 150) {
                 "${data.overview.take(150)}..."
             } else {

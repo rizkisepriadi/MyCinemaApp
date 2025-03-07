@@ -49,4 +49,10 @@ class CinemaRepository(
             localDataSource.setFavoriteMovie(movieEntity, state)
         }
     }
+
+    override fun getMovieById(movieId: Int): Flow<Movie> {
+        return localDataSource.getMovieById(movieId).map {
+            DataMapper.mapEntitiesToDomain(listOf(it)).first()
+        }
+    }
 }

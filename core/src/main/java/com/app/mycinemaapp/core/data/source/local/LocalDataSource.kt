@@ -16,4 +16,6 @@ class LocalDataSource(private val movieDao: MovieDao) {
         movie.isFavorite = newState
         movieDao.updateFavoriteMovie(movie)
     }
+
+    fun getMovieById(movieId: Int): Flow<MovieEntity> = movieDao.getMovieById(movieId)
 }
