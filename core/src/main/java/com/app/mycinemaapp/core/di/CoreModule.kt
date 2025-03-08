@@ -7,6 +7,9 @@ import com.app.mycinemaapp.core.data.source.local.room.MovieDatabase
 import com.app.mycinemaapp.core.data.source.remote.RemoteDataSource
 import com.app.mycinemaapp.core.data.source.remote.network.ApiService
 import com.app.mycinemaapp.core.domain.repository.IMovieRepository
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,15 +22,23 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<MovieDatabase>().movieDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("dicoding".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             MovieDatabase::class.java, "movie.db"
-        ).fallbackToDestructiveMigrationFrom().build()
+        ).fallbackToDestructiveMigrationFrom()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
 val networkModule = module {
     single {
+        val hostname = "api.themoviedb.org"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/k1Hdw5sdSn5kh/gemLVSQD/P4i4IBQEY1tW4WNxh9XM=")
+            .build()
         val authInterceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
                 .addHeader(
@@ -43,6 +54,7 @@ val networkModule = module {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
